@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        function makeMove(row, col) {
+            fetch("/make_move", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ row: row, col: col })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.message);
+                document.getElementById(`cell-${row}-${col}`).textContent = "{{ player_symbol }}";
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Tic-Tac-Toe</h1>
+        <div class="board" style="grid-template-columns: repeat({{ board_size }}, 1fr);">
+            {% for row in range(board_size) %}
+                {% for col in range(board_size) %}
+                    <div id="cell-{{ row }}-{{ col }}" class="cell" onclick="makeMove({{ row }}, {{ col }})"></div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

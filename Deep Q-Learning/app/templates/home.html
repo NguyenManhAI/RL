@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe Setup</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Tic-Tac-Toe</h1>
+        <form action="/" method="post">
+            <label for="player_symbol">Choose Your Symbol:</label>
+            <select id="player_symbol" name="player_symbol" required>
+                <option value="X">X</option>
+                <option value="O">O</option>
+            </select>
+
+            <label for="board_size">Board Size:</label>
+            <input type="number" id="board_size" name="board_size" min="3" max="10" value="3" required>
+
+            <button type="submit" class="start-button">Start Game</button>
+        </form>
+    </div>
+</body>
+</html>
